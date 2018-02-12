@@ -46,7 +46,7 @@ class Inductor < Thor
   end
 
   desc "add", "Add cloud to the inductor"
-  method_option :mqhost, :type => :string, :default => '10.0.3.12'
+  method_option :mqhost, :type => :string, :default => 'searchmq'
   method_option :mqport, :type => :numeric, :default => 61617
   method_option :daq_enabled, :type => :string
   method_option :tunnel_metrics, :type => :string 
@@ -72,8 +72,8 @@ class Inductor < Thor
     if options[:mqhost]
       @mqhost = options[:mqhost]
     else
-      @mqhost = ask("What message queue host (if empty defaults to 10.0.3.12)?")
-      @mqhost = '10.0.3.12' if @mqhost.empty?
+      @mqhost = ask("What message queue host (if empty defaults to searchmq)?")
+      @mqhost = 'searchmq' if @mqhost.empty?
     end
 
     if options[:dns]
@@ -138,8 +138,8 @@ class Inductor < Thor
     if options[:logstash_hosts]
       @logstash_hosts = options[:logstash_hosts]
     else
-      @logstash_hosts = ask("Comma seperated list of logstash host:port ? (if empty defaults to 10.0.3.8:5000)")
-      @logstash_hosts = '10.0.3.8:5000' if  @logstash_hosts.empty?
+      @logstash_hosts = ask("Comma seperated list of logstash host:port ? (if empty defaults to search:5000)")
+      @logstash_hosts = 'search:5000' if  @logstash_hosts.empty?
     end
 
     @max_consumers = options[:max_consumers] || ask("Max Consumers?")
